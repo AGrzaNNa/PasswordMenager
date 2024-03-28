@@ -26,7 +26,7 @@ def store_password(password):
     final_password = hashlib.sha384(second_hash.encode()).hexdigest()
 
     c.execute("INSERT INTO HashedPass (final_password, salt) VALUES (?, ?)", (final_password, salt))
-    c.commit()
+
 
 
 def verify_password(user_id, password):
@@ -68,6 +68,8 @@ if __name__ == "__main__":
     if ps1 == ps2:
         create_passwords_table()
         store_password(ps1)
+        conn.commit()
         print("Password stored successfully.")
     else:
         print("Passwords do not match. Please try again.")
+
